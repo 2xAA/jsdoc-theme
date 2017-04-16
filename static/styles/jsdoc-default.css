@@ -1,18 +1,19 @@
-@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url('https://fonts.googleapis.com/css?family=Arimo:400,400i,700,700i|Space+Mono:400,400i,700,700i');
 
 * {
-  box-sizing: border-box
+  box-sizing: border-box;
 }
 
 body {
   background-color: #f0f0f5;
   color: #4d4e53;
-  margin: 0 auto;
-  padding: 0 20px;
-
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  margin: 0;
+  /* padding: 0 20px; */
+  font-family: 'Arimo', sans-serif;
   font-size: 16px;
   line-height: 160%;
+  box-sizing: border-box;
+  height: 100%;
 }
 
 /*a,
@@ -30,7 +31,7 @@ a:hover {
 }*/
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Arimo', sans-serif;
 }
 
 /*h1, h2, h3, h4, h5, h6 {
@@ -87,7 +88,7 @@ code.source-link, code.source-link a {
 }
 
 tt, code, kbd, samp {
-  font-family: Consolas, Monaco, 'Andale Mono', monospace;
+  font-family: 'Space Mono', 'Space Mono', Consolas, Monaco, 'Andale Mono', monospace;
   background: #f4f4f4;
   padding: 1px 5px;
   border-radius: 5px;
@@ -105,21 +106,20 @@ tt, code, kbd, samp {
 }
 
 #main {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  margin-top: 30px;
-  float: right;
   min-width: 360px;
-  width: calc(100% - 250px);
+  height: calc(100vh - 60px);
+  overflow-y: scroll;
+  position: relative;
 }
 
-header {
-  display: block
+header.doc-header {
+  display: block;
+  padding: 3em 30px;
 }
 
 section {
   display: block;
-  padding: 0 30px;
+  /* padding: 0 30px; */
 }
 
 .variation {
@@ -134,13 +134,20 @@ section {
 }
 
 nav {
-  float: left;
   display: block;
-  width: 250px;
-  overflow: auto;
-  position: fixed;
-  height: 100%;
-  margin-top: 10px;
+}
+
+section::-webkit-scrollbar,
+nav::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 10px;
+}
+
+section::-webkit-scrollbar-thumb,
+nav::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,.33);
+    border: 2px solid #f0f0f5;
+    border-radius: 7px;
 }
 
 nav h3 {
@@ -166,11 +173,12 @@ nav ul {
 
 nav ul a,
 nav ul a:active {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Arimo', sans-serif;
   line-height: 18px;
   padding: 0;
   display: block;
   font-size: 12px;
+  text-decoration: none;
 }
 
 nav ul a:hover,
@@ -216,11 +224,11 @@ nav > h2 > a {
 
 footer {
   color: hsl(0, 0%, 28%);
-  margin-left: 250px;
+  /* margin-left: 250px; */
   display: block;
-  padding: 15px;
+  padding: 1em 30px;
   font-style: italic;
-  font-size: 90%;
+  font-size: 75%;
 }
 
 .ancestors {
@@ -250,7 +258,8 @@ footer {
 }
 
 .name, .signature {
-  font-family: Consolas, Monaco, 'Andale Mono', monospace
+  font-family: 'Space Mono', Consolas, Monaco, 'Andale Mono', monospace;
+  font-weight: normal;
 }
 
 .details {
@@ -364,7 +373,7 @@ footer {
    user-select: text;
 }
 
-.params, .props {
+.params, .props, table {
   border-spacing: 0;
   border: 1px solid #ddd;
   border-collapse: collapse;
@@ -376,7 +385,7 @@ footer {
 
 .params .name, .props .name, .name code {
    color: #4D4E53;
-   font-family: Consolas, Monaco, 'Andale Mono', monospace;
+   font-family: 'Space Mono', Consolas, Monaco, 'Andale Mono', monospace;
    font-size: 100%;
 }
 
@@ -400,11 +409,11 @@ dl.param-type {
 }
 
 .param-type dd {
-  font-family: Consolas, Monaco, 'Andale Mono', monospace;
+  font-family: 'Space Mono', Consolas, Monaco, 'Andale Mono', monospace;
 }
 
 .error-list dt {
-  font-family: Consolas, Monaco, 'Andale Mono', monospace;
+  font-family: 'Space Mono', Consolas, Monaco, 'Andale Mono', monospace;
   font-weight: normal;
   color: #999;
 }
@@ -596,7 +605,7 @@ h1.page-title {
   color: #f5f5f5;
   margin: 15px;
   font-style: italic;
-  font-family: Consolas, Monaco, 'Andale Mono', monospace;
+  font-family: 'Space Mono', Consolas, Monaco, 'Andale Mono', monospace;
 }
 
 h2 {
@@ -623,21 +632,25 @@ div#main section {
   clear: both;
 }
 
-h3.constructor, h3.subsection-title {
-  border-top: 1px solid #ddd;
-  margin-left: -30px;
-  margin-right: -30px;
-  padding: 2em 30px 1em 30px;
+h3.constructor {
+  padding: 2em 30px 1em 0;
   color: #666;
   font-size: 1.4em;
   text-transform: uppercase;
 }
 
+h3.subsection-title {
+  padding: 50px 30px;
+  color: #666;
+  margin: 0;
+  font-size: 1.4em;
+  text-transform: uppercase;
+}
+
 h4.name {
-  margin-left: -30px;
-  margin-right: -30px;
-  padding: 2em 30px 0em 30px;
-  border-top: 1px solid #eee;
+  margin: 0;
+  margin-right: 0;
+  padding: 2em 0 0em 0;
   font-size: 1.6em;
 }
 
@@ -666,11 +679,18 @@ code.source-link a {
 }
 
 .method-details, .member-details {
-  padding-bottom: 30px;
+  padding: 0 30px 30px;
+  background-color: #fff;
+  margin: 0 0 50px 0;
 }
 
-nav.nav {
-  margin-top: 30px;
+nav.side-nav {
+  padding-top: 30px;
+  padding-left: 20px;
+  /* box-shadow: #b5b5b9 0 0 10px 0px; */
+  height: calc(100vh - 60px);
+  overflow-y: scroll;
+  min-width: 250px;
 }
 
 h4.name a {
@@ -721,6 +741,11 @@ a {
     content: " | ";
 }
 
+ul.augments {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 
 /* BOOTSTRAP */
 
@@ -736,7 +761,7 @@ a {
     margin-bottom: 5px;
 }
 .bs-callout p:last-child {
-    margin-bottom: 0;
+    /* margin-bottom: 0; */
 }
 .bs-callout code {
     border-radius: 3px;
@@ -797,4 +822,66 @@ a {
 }
 .label-api {
   background-color: #800080;
+}
+
+
+h2.extends {
+    margin: 0;
+    text-transform: initial;
+}
+
+h1.jsdoc-class {
+    margin: 0;
+}
+
+div#app {
+    grid-template-columns: 250px auto;
+    display: grid;
+    height: 100vh;
+    grid-template-rows: 60px auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.lead p {
+    margin-bottom: 0;
+}
+
+header.real-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height:  60px;
+    width: 100%;
+    background-color: #f0f0f5;
+    box-shadow: #b5b5b9 0 0 10px 0px;
+}
+
+header.faux-header {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+shadow-bar {
+    position: absolute;
+    top: 0;
+    left: -1px;
+    width: 1px;
+    box-shadow: #b5b5b9 0 0 10px 2px;
+    bottom: 0;
+    height: 9999%;
+}
+
+.member-details + .subsection-title {
+    padding: 0 30px 50px;
+}
+
+.method-details:last-child {
+    margin: 0;
+}
+
+section.readme {
+    padding: 30px;
+    background-color: #ffffff;
 }

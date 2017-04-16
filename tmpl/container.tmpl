@@ -27,20 +27,37 @@
 
 ?>
 
-<header data-tmpl="container.tmpl">
+<header class="doc-header" data-tmpl="container.tmpl">
+    <?js
+        var extendsText = '';
+        if(doc.augments && doc.augments.length) {
+            extendsText = 'extends ' + doc.augments[0];
+        }
+    ?>
+
     <?js if (!doc.longname || doc.kind !== 'module') { ?>
-        <h2><?js if (doc.ancestors && doc.ancestors.length) { ?>
+        <h1 class="jsdoc-class"><?js if (doc.ancestors && doc.ancestors.length) { ?>
             <span class="ancestors"><?js= doc.ancestors.join('') ?></span>
         <?js } ?>
         <?js= doc.name ?>
         <?js if (doc.variation) { ?>
             <sup class="variation"><?js= doc.variation ?></sup>
-        <?js } ?></h2>
+        <?js } ?></h1>
+
+        <?js if(doc.augments && doc.augments.length) { ?>
+        <h2 class="extends"><?js= extendsText ?></h2>
+        <?js } ?>
+
         <?js if (doc.classdesc) { ?>
             <div class="lead"><?js= doc.classdesc ?></div>
         <?js } ?>
+
     <?js } else if (doc.kind === 'module' && doc.modules) { ?>
-      <h2>Module: <?js= doc.name ?></h2>
+
+        <h1 class="jsdoc-module">Module: <?js= doc.name ?></h1>
+        <?js if(doc.augments && doc.augments.length) { ?>
+        <h2 class="extends"><?js= extendsText ?></h2>
+        <?js } ?>
         <?js doc.modules.forEach(function(module) { ?>
             <?js if (module.classdesc) { ?>
                 <div class="lead"><?js= module.classdesc ?></div>
@@ -48,6 +65,8 @@
         <?js }) ?>
     <?js } ?>
 
+
+    <!--
     <?js
     if (members.length + methods.length > 0) {
 
@@ -87,6 +106,7 @@
     <?js }
 
     ?>
+    -->
 </header>
 
 <article>
@@ -114,12 +134,6 @@
         <?js } ?>
     <?js } ?>
     </div>
-
-    <?js if (doc.augments && doc.augments.length) { ?>
-        <h3 class="subsection-title">Extends</h3>
-
-        <?js= self.partial('augments.tmpl', doc) ?>
-    <?js } ?>
 
     <?js if (doc.requires && doc.requires.length) { ?>
         <h3 class="subsection-title">Requires</h3>
